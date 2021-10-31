@@ -1,0 +1,18 @@
+{% extends "articles/base.html" %}
+
+
+{% block content %}
+    <div class="site-section bg-light">
+      <div class="container">
+        <div class="row align-items-stretch retro-layout-2">
+
+            <ul>
+                <li>{{comment.comment_autor}}:{{comment.comment_text}}</li>
+                <li><a href = "{%url 'articles:comment_update' pk=comment.pk %}">Изменить</a></li>
+                <li><a href = "{%url 'articles:comment_delete' pk=comment.pk %}">Удалить</a></li>
+            </ul>
+
+        </div>
+      </div>
+    </div>
+{% endblock %}

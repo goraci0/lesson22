@@ -1,0 +1,75 @@
+{% extends "articles/base.html" %}
+
+
+{% block content %}
+
+  <div class="site-wrap">
+    <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url('images/hero_1.jpg');">
+      <div class="container">
+        <div class="row same-height justify-content-center">
+          <div class="col-md-12 col-lg-10">
+            <div class="post-entry text-center">
+              <h2>{{article.article_name}}</h2>
+              <span class="date">{{article.article_date}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="text">{{article.article_text}}</div>
+      </div>
+    </div>
+
+    <section class="site-section py-lg">
+      <div class="container">
+        
+        <div class="row blog-entries element-animate">
+
+          <div class="col-md-12 col-lg-8 main-content">
+
+            <div class="pt-5">
+              <h3 class="mb-5">Comments</h3>
+              <ul>
+              <!-- <li><a href="{% url 'articles:comment_list'  %}">Comments</a></li> -->
+
+                {% for comment in comments.all%}
+
+                <li>
+                  <a href = "{%url 'articles:comment_one' pk=comment.pk %}">
+                    {{comment.comment_autor}}:{{comment.comment_text}}
+                  </a>
+                </li>
+
+                {% endfor %}
+
+                <a href = "{%url 'articles:comment_create' %}">Создать сомментарий</a>
+
+
+              </ul>
+              <!-- END comment-list -->
+              
+              <div class="comment-form-wrap pt-5">
+                <h3 class="mb-5">Leave a comment</h3>
+                <form metod="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+
+                  {% for field in form %}
+                      <p>{{field.label_tag}}</p>
+                      <hr>
+                        {% for error in field.errors %}
+                          {{error}}
+                        {% endfor %}
+                      <p>{{field}}</p>
+                  {% endfor %}
+
+                  <div class="form-group">
+                    <input type="submit" value="Post Comment" class="btn btn-primary">
+                  </div>
+
+                </form>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- END main-content -->
+
+ {% endblock %}

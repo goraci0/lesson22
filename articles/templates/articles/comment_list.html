@@ -1,0 +1,19 @@
+{% extends "articles/base.html" %}
+
+
+{% block content %}
+    <div class="site-section bg-light">
+      <div class="container">
+        <div class="row align-items-stretch retro-layout-2">
+            <ul>
+            {% for comment in comments%}
+                <li>
+                    <a href = "{%url 'articles:comment_one' pk=comment.pk %}">{{comment.comment_autor}}:{{comment.comment_text}}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+          <a href = "{%url 'articles:comment_create' %}">Создать сомментарий</a>
+      </div>
+    </div>
+{% endblock %}
